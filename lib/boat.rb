@@ -1,36 +1,33 @@
 class Boat
 
-
-
-  attr_accessor :floating, :sunk, :damage
+  attr_accessor :floating, :sunk, :damage, :direction
   alias_method :floating?, :floating
   alias_method :sunk?, :sunk
-  attr_reader :size
+  attr_reader :size, :coordinates
 
-  def initialize size = 1
+  def initialize size = 1, coordinates = [0,0]
     @floating = true
     @size = size
     @sunk = false
     @damage = 0
-
+    @coordinates = coordinates
+    @direction = 'horizontal'
   end
-
-  # def floating?
-  #   damage >= size ? self.floating = false : self.floating = true
-  # end
-  #
-  # def sunk?
-  #   !@floating
-  # end
 
   def hit
     self.damage = damage + 1
     check_boat
   end
 
+  def rotate
+    self.direction == 'horizontal' ? self.direction = 'vertical' : self.direction = 'horizontal'
+  end
+
+  private
+
   def check_boat
     if check_damage
-      self.floating = false
+      floating_boat
       sunk_boat
     end
   end
@@ -41,5 +38,9 @@ class Boat
 
   def sunk_boat
     self.sunk = true
+  end
+
+  def floating_boat
+    self.floating = false
   end
 end

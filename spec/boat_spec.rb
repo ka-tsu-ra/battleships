@@ -7,17 +7,12 @@ describe Boat do
   it {is_expected.to respond_to :hit}
 
   it "should be created floating" do
-    expect(subject).to be_floating 
+    expect(subject).to be_floating
   end
 
-  # it "should sink when hit" do
-  #   subject.hit
-  #   expect(subject.floating?).to eq false
+  # it "should be created size 1 by default" do
+  #   expect(subject.size).to eq 1
   # end
-
-  it "should be created size 1 by default" do
-    expect(subject.size).to eq 1
-  end
 
   it "can be sunk" do
     subject.size.times {subject.hit}
@@ -25,13 +20,38 @@ describe Boat do
   end
 
   it "can create boats of different sizes" do
-    ship = Boat.new 3
+    ship = Boat.new 3, [2, 3]
     expect(ship.size).to eq 3
   end
 
   it "should only sink when hits == size" do
-    ship = Boat.new 4
+    ship = Boat.new 4, [2, 6]
     ship.hit
     expect(ship).to_not be_sunk
   end
+
+    it "has starting coordinates after being created" do
+      expect(subject.coordinates).to eq [0, 0]
+    end
+
+  context "direction" do
+
+      it "defaults to horizontal" do
+        expect(subject.direction).to eq "horizontal"
+      end
+
+      it "can set direction using set_direction" do
+        subject.rotate
+        expect(subject.direction).to eq 'vertical'
+      end
+
+      it "is horizontal after two rotates" do
+        2.times { subject.rotate }
+        expect(subject.direction).to eq "horizontal"
+      end
+
+  end
+
 end
+
+
