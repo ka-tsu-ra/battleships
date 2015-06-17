@@ -23,6 +23,23 @@ class Boat
     self.direction == 'horizontal' ? self.direction = 'vertical' : self.direction = 'horizontal'
   end
 
+  def used_coordinates
+    array = []
+    size.times do |x|
+      array.push [coordinates[0], coordinates[1]]
+      index_depending_on_direction coordinates
+    end
+    array
+  end
+
+  def index_depending_on_direction coordinates
+    if direction == 'horizontal'
+      coordinates[1] += 1
+    else direction == 'vertical'
+      coordinates[0] += 1
+    end
+  end
+
   private
 
   def check_boat

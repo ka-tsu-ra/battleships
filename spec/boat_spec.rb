@@ -52,6 +52,21 @@ describe Boat do
 
   end
 
+  context "coordinates" do
+
+    it "finds coordinates when horizontal" do
+      ship = Boat.new 3, [0,0]
+      expect(ship.used_coordinates).to eq [[0,0],[0,1],[0,2]]
+    end
+
+    it "finds coordinates when vertical" do
+      ship = Boat.new 3, [1,5]
+      ship.rotate
+      expect(ship.used_coordinates).to eq [[1,5],[2,5],[3,5]]
+    end
+
+  end
+
 end
 
 
