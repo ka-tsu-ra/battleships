@@ -5,13 +5,19 @@ describe Board do
   it { is_expected.to respond_to(:place).with(1).argument}
 
   it "places boats in array" do
-    boat = double :boat, :coordinates => [1,4]
+    board = Board.new(size: 10)
+    boat = double :boat, :coordinates => :A1
     subject.place(boat)
     expect(subject.board[0]).to eq boat
   end
 
-  it "doesn't allow placement off the board" do
-    boat = double :boat, :coordinates => [12,15]
+  it "doesn't allow placement off the board horizontally" do
+    boat = double :boat, :coordinates => :Z1
+    expect{ subject.place boat }.to raise_error "This spot isn't on the board"
+  end
+
+  it "doesn't allow placement off the board vertically" do
+    boat = double :boat, :coordinates => :A11
     expect{ subject.place boat }.to raise_error "This spot isn't on the board"
   end
 
