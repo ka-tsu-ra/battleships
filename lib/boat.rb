@@ -26,35 +26,36 @@ class Boat
   def placed_coordinates
     if direction == "horizontal"
       coords = []
-      sc = starting_coordinate
+      sc = @starting_coordinate
       coords << sc
-      (size - 1).times do
-        coords << sc.next
-        sc = sc.next
-      end
+      extend_coords(coords, sc)
       coords
     elsif direction == "vertical"
       coords = []
-      sc = starting_coordinate[0]
+      sc = @starting_coordinate[0]
       coords << sc
-      (size - 1).times do
-        coords << sc.next
-        sc = sc.next
-      end
+      extend_coords(coords, sc)
       coords.map {|x| x + "#{starting_coordinate[1..-1]}"}
     end
   end
 
-  def vertical
-  coords = []
-    sc = starting_coordinates[0]
-    coords << sc
+  def extend_coords coords, sc
     (size - 1).times do
       coords << sc.next
       sc = sc.next
     end
-    coords.map {|x| x + "#{coordinates[1..-1]}"}
   end
+
+  # def vertical
+  # coords = []
+  #   sc = starting_coordinates[0]
+  #   coords << sc
+  #   (size - 1).times do
+  #     coords << sc.next
+  #     sc = sc.next
+  #   end
+  #   coords.map {|x| x + "#{coordinates[1..-1]}"}
+  # end
 
   # def used_coordinates
   #   array = []

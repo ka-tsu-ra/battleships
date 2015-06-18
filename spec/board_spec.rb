@@ -21,6 +21,10 @@ describe Board do
     expect{ subject.place boat }.to raise_error "This spot isn't on the board"
   end
 
+  it "doesn't allow ships to overlap" do
+    boat = double :boat, :coordinates => :A1
+    subject.place boat
+  end
 
 
 
