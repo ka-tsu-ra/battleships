@@ -10,5 +10,12 @@ describe Board do
     expect(subject.board[0]).to eq boat
   end
 
+  it "doesn't allow placement off the board" do
+    boat = double(:boat), :coordinates [12,15]
+    expect{ subject.place boat }.to raise_error "This grid isn't on the board"
+  end
+
+
+
 
 end

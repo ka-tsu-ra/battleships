@@ -1,3 +1,5 @@
+require_relative './boat.rb'
+
 class Board
 
   attr_accessor :board
