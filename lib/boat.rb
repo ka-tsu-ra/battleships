@@ -29,7 +29,7 @@ class Boat
       array.push [coordinates[0], coordinates[1]]
       index_depending_on_direction coordinates
     end
-    array
+    @coordinates = array
   end
 
   def index_depending_on_direction coordinates
