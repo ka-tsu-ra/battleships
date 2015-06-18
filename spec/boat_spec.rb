@@ -20,18 +20,18 @@ describe Boat do
   end
 
   it "can create boats of different sizes" do
-    ship = Boat.new 3, [2, 3]
+    ship = Boat.new 3, "A1"
     expect(ship.size).to eq 3
   end
 
   it "should only sink when hits == size" do
-    ship = Boat.new 4, [2, 6]
+    ship = Boat.new 4, "A1"
     ship.hit
     expect(ship).to_not be_sunk
   end
 
     it "has starting coordinates after being created" do
-      expect(subject.coordinates).to eq [0, 0]
+      expect(subject.starting_coordinate).to eq "A1"
     end
 
   context "direction" do
@@ -55,14 +55,14 @@ describe Boat do
   context "coordinates" do
 
     it "finds coordinates when horizontal" do
-      ship = Boat.new 3, [0,0]
-      expect(ship.used_coordinates).to eq [[0,0],[0,1],[0,2]]
+      ship = Boat.new 3, "A1"
+      expect(ship.placed_coordinates).to eq ["A1","A2","A3"]
     end
 
     it "finds coordinates when vertical" do
-      ship = Boat.new 3, [1,5]
+      ship = Boat.new 3, "A5"
       ship.rotate
-      expect(ship.used_coordinates).to eq [[1,5],[2,5],[3,5]]
+      expect(ship.placed_coordinates).to eq ["A5","B5","C5"]
     end
 
   end

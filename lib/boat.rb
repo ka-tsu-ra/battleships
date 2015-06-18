@@ -3,14 +3,14 @@ class Boat
   attr_accessor :floating, :sunk, :damage, :direction
   alias_method :floating?, :floating
   alias_method :sunk?, :sunk
-  attr_reader :size, :coordinates
+  attr_reader :size, :starting_coordinate
 
-  def initialize size = 1, coordinates = [0,0]
+  def initialize size = 1, starting_coordinate = "A1"
     @floating = true
     @size = size
     @sunk = false
     @damage = 0
-    @coordinates = coordinates
+    @starting_coordinate = starting_coordinate
     @direction = 'horizontal'
   end
 
@@ -23,22 +23,55 @@ class Boat
     self.direction == 'horizontal' ? self.direction = 'vertical' : self.direction = 'horizontal'
   end
 
-  def used_coordinates
-    array = []
-    size.times do |x|
-      array.push [coordinates[0], coordinates[1]]
-      index_depending_on_direction coordinates
+  def placed_coordinates
+    if direction == "horizontal"
+      coords = []
+      sc = starting_coordinate
+      coords << sc
+      (size - 1).times do
+        coords << sc.next
+        sc = sc.next
+      end
+      coords
+    elsif direction == "vertical"
+      coords = []
+      sc = starting_coordinate[0]
+      coords << sc
+      (size - 1).times do
+        coords << sc.next
+        sc = sc.next
+      end
+      coords.map {|x| x + "#{starting_coordinate[1..-1]}"}
     end
-    @coordinates = array
   end
 
-  def index_depending_on_direction coordinates
-    if direction == 'horizontal'
-      coordinates[1] += 1
-    else direction == 'vertical'
-      coordinates[0] += 1
+  def vertical
+  coords = []
+    sc = starting_coordinates[0]
+    coords << sc
+    (size - 1).times do
+      coords << sc.next
+      sc = sc.next
     end
+    coords.map {|x| x + "#{coordinates[1..-1]}"}
   end
+
+  # def used_coordinates
+  #   array = []
+  #   size.times do |x|
+  #     array.push [coordinates[0], coordinates[1]]
+  #     index_depending_on_direction coordinates
+  #   end
+  #   @coordinates = array
+  # end
+
+  # def index_depending_on_direction coordinates
+  #   if direction == 'horizontal'
+  #     coordinates[1] += 1
+  #   else direction == 'vertical'
+  #     coordinates[0] += 1
+  #   end
+  # end
 
   private
 
