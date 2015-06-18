@@ -65,6 +65,11 @@ describe Boat do
       expect(ship.placed_coordinates).to eq ["A5","B5","C5"]
     end
 
+    it "cannot have coordinates that aren't consecutive" do
+      ship = Boat.new 5, "B6"
+      expect(ship.placed_coordinates).not_to include("C0")
+    end
+
   end
 
 end
